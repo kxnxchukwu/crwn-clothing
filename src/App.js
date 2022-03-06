@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 
@@ -14,38 +14,13 @@ import { createStructuredSelector } from 'reselect';
 import { selectCurrentUser } from './redux/user/user.selectors';
 import { checkUserSession } from './redux/user/user.actions';
 
-class App extends React.Component {
-  unsubscribeFromAuth = null;
+const App = ({checkUserSession, currentUser }) => {
 
-  componentDidMount() {
-
-    const {checkUserSession} = this.props;
+  useEffect(() => {
     checkUserSession();
+  }, [checkUserSession]);
 
-    /* this.unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
-      if (userAuth) {
-        const userRef = await createUserProfileDocument(userAuth);
-
-        userRef.onSnapshot(snapShot => {
-          setCurrentUser({
-            id: snapShot.id,
-            ...snapShot.data()
-          });
-        });
-      }
-       
-
-      setCurrentUser(userAuth);
-
-    }); */
-  }
-
-  componentWillUnmount() {
-    this.unsubscribeFromAuth();
-  }
-
-  render() {
-    return (
+  return (
       <div>
       <BrowserRouter>
       <Header/>
@@ -57,7 +32,7 @@ class App extends React.Component {
             exact
             path='/signin'
             render={() =>
-              this.props.currentUser ? (
+              currentUser ? (
                 <Redirect to='/' />
               ) : (
                 <SignInAndSignUpPage />
@@ -71,7 +46,6 @@ class App extends React.Component {
     );
   }
 
-}
 
 const mapStateToProps = createStructuredSelector({
   currentUser: selectCurrentUser
