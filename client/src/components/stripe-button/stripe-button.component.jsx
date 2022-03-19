@@ -18,11 +18,11 @@ const StripeCheckoutButton = ({ price }) => {
         }).then(response => {
             toast("Payment Successful.", { type: "success" });
         }).catch(error => {
-            console.log("Payment Error: ", JSON.parse(error));
             toast(
                 "Something went wrong, There was an issue with your payment. Please ensure you are using the provided credit card.",
                 { type: "error" }
             );
+            console.log("Payment Error: ", JSON.parse(error));
         })
     }
 
