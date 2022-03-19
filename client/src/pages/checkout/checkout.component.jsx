@@ -5,9 +5,12 @@ import { createStructuredSelector } from "reselect";
 import { selectCartItems, selectCartTotal } from "../../redux/cart/cart.selectors";
 import CheckoutItem from "../../components/checkout-item/checkout-item.component";
 import StripeCheckoutButton from "../../components/stripe-button/stripe-button.component";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const CheckoutPage = ({total, cartItems}) => (
     <div className="checkout-page">
+    <ToastContainer />
     <div className="checkout-header">
     <div className="header-block">
         <span>Product</span>
