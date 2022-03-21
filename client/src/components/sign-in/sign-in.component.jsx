@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import { connect } from 'react-redux';
 import FormInput from '../form-input/form-input.component';
-import CustomButton from '../custom-button/custom-button.component';
+import Button, { BUTTON_TYPE_CLASSES } from '../button/button.component';
 
 import {
   SignInContainer,
@@ -49,15 +49,20 @@ const SignIn = ({emailSignInStart, googleSignInStart}) => {
             required
           />
           <ButtonsBarContainer>
-            <CustomButton type='submit'> Sign in </CustomButton>
-            <CustomButton type="button" onClick={googleSignInStart} isGoogleSignIn>
+            <Button type='submit'> Sign in </Button>
+            <Button
+            buttonType={BUTTON_TYPE_CLASSES.google}
+            type='button'
+            onClick={googleSignInStart}
+            >
               Sign in with Google
-            </CustomButton>
+            </Button>
           </ButtonsBarContainer>
         </form>
       </SignInContainer>
     );
   }
+
 
 const mapDispatchToProps = dispatch => ({
     googleSignInStart: () => dispatch(googleSignInStart()),
