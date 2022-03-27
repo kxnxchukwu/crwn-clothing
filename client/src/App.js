@@ -7,7 +7,6 @@ import { selectCurrentUser } from "./redux/user/user.selectors";
 import { checkUserSession } from "./redux/user/user.actions";
 import Spinner from "./components/spinner/spinner.component";
 import ErrorBoundary from "./components/error-boundary/error-boundary.component";
-import NotFound from "./components/notfound/notfound.component";
 
 const HomePage = lazy(() => import("./pages/homepage/homepage.component"));
 const ShopPage = lazy(() => import("./pages/shop/shop.component"));
@@ -31,7 +30,7 @@ const App = () => {
         <Suspense fallback={<Spinner />}>
           <Switch>
             <ErrorBoundary>
-              <Route path="/shop" component={ShopPage} />
+              <Route exact path="/shop" component={ShopPage} />
               <Route exact path="/checkout" component={CheckoutPage} />
               <Route
                 exact
@@ -40,9 +39,7 @@ const App = () => {
                   currentUser ? <Redirect to="/" /> : <SignInAndSignUpPage />
                 }
               />
-              <Route exact strict path="/" component={HomePage} />
-              <Route pat="/404" component={NotFound} />
-              <Redirect to={"/404"} />
+              <Route exact path="/" component={HomePage} />
             </ErrorBoundary>
           </Switch>
         </Suspense>
