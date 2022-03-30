@@ -9,6 +9,7 @@ const CollectionPage = () => {
     const {collectionId} = useParams();
     const collection = useSelector(selectCollection(collectionId));
     const {title, items} = collection;
+    console.log(collection);
     return (
         <div className="collection-page">
         <h2 className="title">{title}</h2>
