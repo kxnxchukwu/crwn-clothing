@@ -1,22 +1,26 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import * as serviceWorkerRegistration from './serviceWorkerRegistration';
-import reportWebVitals from './reportWebVitals';
-import {Provider} from "react-redux";
-import {persistor, store} from "./redux/store";
-import { PersistGate } from 'redux-persist/integration/react';
+import React from "react";
+import ReactDOM from "react-dom";
+import "./index.css";
+import App from "./App";
+import * as serviceWorkerRegistration from "./serviceWorkerRegistration";
+import reportWebVitals from "./reportWebVitals";
+import { Provider } from "react-redux";
+import { persistor, store } from "./redux/store";
+import { PersistGate } from "redux-persist/integration/react";
+import { Elements } from "@stripe/react-stripe-js";
+import { stripePromise } from "./stripe/stripe.utils";
 
 ReactDOM.render(
   <Provider store={store}>
-  <React.StrictMode>
-  <PersistGate persistor={persistor}>
-    <App />
-  </PersistGate>
-  </React.StrictMode>
+    <React.StrictMode>
+      <PersistGate persistor={persistor}>
+        <Elements stripe={stripePromise}>
+          <App />
+        </Elements>
+      </PersistGate>
+    </React.StrictMode>
   </Provider>,
-  document.getElementById('root')
+  document.getElementById("root")
 );
 
 // If you want your app to work offline and load faster, you can change
