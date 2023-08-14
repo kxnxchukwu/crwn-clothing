@@ -1,6 +1,7 @@
 import { ReactElement, ReactNode } from "react";
 import {
   BaseButton,
+  ButtonSpinner,
   GoogleSignInButton,
   InvertedButton,
 } from "./button.styles";
@@ -20,18 +21,26 @@ const getButton = (buttonType = BUTTON_TYPE_CLASSES.base) =>
 
 export interface ButtonProps {
   onClick?: () => void;
+  isLoading?: boolean;
   children: ReactNode;
   buttonType:
     | typeof BUTTON_TYPE_CLASSES.base
     | typeof BUTTON_TYPE_CLASSES.google
     | typeof BUTTON_TYPE_CLASSES.inverted;
+  type?: string;
 }
 
 export default function Button({
   children,
   buttonType,
+  isLoading,
+  type,
   ...otherProps
 }: ButtonProps): ReactElement {
   const CustomButton = getButton(buttonType);
-  return <CustomButton {...otherProps}>{children}</CustomButton>;
+  return (
+    <CustomButton disabled={isLoading} {...otherProps}>
+      {isLoading ? <ButtonSpinner /> : children}
+    </CustomButton>
+  );
 }
