@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 export const CartIconContainer = styled.div`
   width: 45px;
@@ -9,8 +9,11 @@ export const CartIconContainer = styled.div`
   justify-content: center;
   cursor: pointer;
   svg {
-    width: 24px;
-    height: 24px;
+    width: 32px;
+    height: 32px;
+    fill: ${({ theme }) => theme.color};
+    stroke: ${({ theme }) => theme.color};
+    transition: unset;
   }
 `;
 
