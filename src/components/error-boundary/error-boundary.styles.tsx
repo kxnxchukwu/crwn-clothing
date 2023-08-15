@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 export const ErrorImageOverlay = styled.div`
   height: 60vh;
@@ -9,7 +9,13 @@ export const ErrorImageOverlay = styled.div`
   align-items: center;
 `;
 
-export const ErrorImageContainer = styled.div`
+interface ErrorImageContainerProps {
+  imageUrl: string;
+}
+
+export const ErrorImageContainer = styled.div<ErrorImageContainerProps>`
+  background: ${({ theme }) => theme.backgroundColor};
+  color: ${({ theme }) => theme.color};
   display: inline-block;
   background-image: ${({ imageUrl }) => `url(${imageUrl})`};
   background-size: cover;
