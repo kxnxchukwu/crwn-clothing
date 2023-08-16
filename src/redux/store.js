@@ -20,4 +20,5 @@ sagaMiddleware.run(rootSaga);
 
 export const persistor = persistStore(store);
 
+// eslint-disable-next-line import/no-anonymous-default-export
 export default { store, persistStore };
