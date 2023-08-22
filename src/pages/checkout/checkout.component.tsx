@@ -1,19 +1,15 @@
 import { ReactElement } from "react";
 import "./checkout.styles.scss";
 import { useSelector } from "react-redux";
-import {
-  selectCartItems,
-  selectCartTotal,
-} from "../../redux/cart/cart.selectors";
+import { selectCartItems, selectCartTotal } from "../../features/cart-slice";
 import CheckoutItem from "../../components/checkout-item/checkout-item.component";
 import PaymentForm from "../../components/payment-form/payment-form.component";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { Item } from "../../redux/cart/cart.actions";
 
 export default function CheckoutPage(): ReactElement {
   const total = useSelector(selectCartTotal);
-  const cartItems: Item[] = useSelector(selectCartItems);
+  const cartItems = useSelector(selectCartItems);
   return (
     <div className="checkout-page">
       <ToastContainer />
@@ -43,7 +39,7 @@ export default function CheckoutPage(): ReactElement {
       <div className="test-warning">
         *Please use the following test credit card for payments*
         <br />
-        4242 4242 4242 4242 - Expiry: 01/23 - CVV: 123
+        4242 4242 4242 4242 - Expiry: 12/29 - CVV: 123
       </div>
       <PaymentForm />
     </div>
