@@ -4,7 +4,7 @@ import ThemeToggler from "../theme-toggler/ThemeToggler.component";
 import { useDispatch, useSelector } from "react-redux";
 import CartIcon from "../cart-icon/cart-icon.component";
 import CartDropdown from "../cart-dropdown/cart-dropdown.component";
-import { selectCardHidden } from "../../redux/cart/cart.selectors";
+import { selectCardHidden } from "../../features/cart-slice";
 import { selectCurrentUser } from "../../redux/user/user.selectors";
 import {
   HeaderContainer,
@@ -15,11 +15,7 @@ import {
 import { signOutStart } from "../../redux/user/user.actions";
 import { useLocation } from "react-router-dom";
 
-export interface HeaderProps {
-  themeToggler: () => void;
-}
-
-export default function Header({ themeToggler }: HeaderProps): ReactElement {
+export default function Header(): ReactElement {
   const { pathname } = useLocation();
   const dispatch = useDispatch();
   const hidden = useSelector(selectCardHidden);
@@ -31,7 +27,7 @@ export default function Header({ themeToggler }: HeaderProps): ReactElement {
       </LogoContainer>
       <OptionsContainer className="options">
         <>
-          <ThemeToggler themeToggler={themeToggler} />
+          <ThemeToggler />
         </>
         <OptionLink
           active={pathname === "/shop" ? "active" : undefined}
