@@ -1,5 +1,4 @@
 import { takeLatest, put, call, all } from "redux-saga/effects";
-import UserActionTypes from "./user.types";
 import {
   auth,
   googleProvider,
@@ -13,7 +12,7 @@ import {
   signOutSuccess,
   signUpFailure,
   signUpSuccess,
-} from "./user.actions";
+} from "../../features/user-reducer";
 
 export function* getSnapshotFromUserAuth(userAuth, additionalData) {
   try {
@@ -39,7 +38,7 @@ export function* signInWithGoogle() {
 }
 
 export function* onGoogleSignInStart() {
-  yield takeLatest(UserActionTypes.GOOGLE_SIGN_IN_START, signInWithGoogle);
+  yield takeLatest("user/googleSignInStart", signInWithGoogle);
 }
 
 export function* signInWithEmail({ payload: { email, password } }) {
@@ -52,11 +51,11 @@ export function* signInWithEmail({ payload: { email, password } }) {
 }
 
 export function* onEmailSignInStart() {
-  yield takeLatest(UserActionTypes.EMAIL_SIGN_IN_START, signInWithEmail);
+  yield takeLatest("user/emailSignInStart", signInWithEmail);
 }
 
 export function* onCheckUserSession() {
-  yield takeLatest(UserActionTypes.CHECK_USER_SESSION, isUserAuthenticated);
+  yield takeLatest("user/checkUserSession", isUserAuthenticated);
 }
 
 export function* isUserAuthenticated() {
@@ -70,7 +69,7 @@ export function* isUserAuthenticated() {
 }
 
 export function* onSignOutStart() {
-  yield takeLatest(UserActionTypes.SIGN_OUT_START, signOut);
+  yield takeLatest("user/signOutStart", signOut);
 }
 
 export function* signOut() {
@@ -83,7 +82,7 @@ export function* signOut() {
 }
 
 export function* onSignUpStart() {
-  yield takeLatest(UserActionTypes.SIGN_UP_START, signUp);
+  yield takeLatest("user/signUpStart", signUp);
 }
 
 export function* signUp({ payload: { email, password, displayName } }) {
@@ -96,7 +95,7 @@ export function* signUp({ payload: { email, password, displayName } }) {
 }
 
 export function* onSignUpSuccess() {
-  yield takeLatest(UserActionTypes.SIGN_UP_SUCCESS, signInAfterSignUp);
+  yield takeLatest("user/signUpSuccess", signInAfterSignUp);
 }
 
 export function* signInAfterSignUp({ payload: { user, additionalData } }) {
