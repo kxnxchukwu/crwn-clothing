@@ -1,16 +1,17 @@
-import { Suspense, useEffect, lazy, useState } from "react";
+import { Suspense, useEffect, lazy } from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { ThemeProvider } from "styled-components";
 import Header from "./components/header/header.component";
 import { GlobalStyle } from "./global.styles";
 import { useSelector, useDispatch } from "react-redux";
-import { selectCurrentUser } from "./redux/user/user.selectors";
-import { checkUserSession } from "./redux/user/user.actions";
+import { selectCurrentUser, checkUserSession } from "./features/user-reducer";
 import Spinner from "./components/spinner/spinner.component";
 import ErrorBoundary from "./components/error-boundary/error-boundary.component";
 import { lightTheme, darkTheme } from "./themes";
-import { fetchCollectionsStart } from "./redux/shop/shop.actions";
+import { fetchCollectionsStart } from "./features/shop-slice";
 import NotFound from "./components/notfound/notfound.component";
+import { selectTheme } from "./features/theme-slice";
+import ProductDetailsPage from "./pages/productdetails/ProductDetails.component";
 
 const HomePage = lazy(() => import("./pages/homepage/homepage.component"));
 const SignInAndSignUpPage = lazy(
@@ -28,15 +29,12 @@ const CollectionPageContainer = lazy(
 
 const App = () => {
   const currentUser = useSelector(selectCurrentUser);
+  const theme = useSelector(selectTheme);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(checkUserSession());
     dispatch(fetchCollectionsStart());
   }, [dispatch]);
-  const [theme, setTheme] = useState("light");
-  const themeToggler = () => {
-    theme === "light" ? setTheme("dark") : setTheme("light");
-  };
   return (
     <ThemeProvider theme={theme === "light" ? lightTheme : darkTheme}>
       <div>
@@ -44,13 +42,19 @@ const App = () => {
           <ErrorBoundary>
             <>
               <GlobalStyle />
-              <Header themeToggler={themeToggler} />
+              <Header />
               <Suspense fallback={<Spinner />}>
                 <Routes>
                   <Route path="/" element={<HomePage />} />
                   <Route path="/shop">
                     <Route index element={<CollectionsOverviewContainer />} />
-                    <Route path=":id" element={<CollectionPageContainer />} />
+                    <Route path="/shop/:id">
+                      <Route index element={<CollectionPageContainer />} />
+                      <Route
+                        path=":productId"
+                        element={<ProductDetailsPage />}
+                      />
+                    </Route>
                   </Route>
                   <Route path="/checkout" element={<CheckoutPage />} />
                   <Route path="/contact" element={<ContactPage />} />
