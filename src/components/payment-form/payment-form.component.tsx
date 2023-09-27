@@ -7,11 +7,12 @@ import {
 } from "./payment-form.styles";
 import { StripeCardElement } from "@stripe/stripe-js";
 import { toast } from "react-toastify";
-import { useSelector } from "react-redux";
-import { selectCartTotal } from "../../redux/cart/cart.selectors";
-import { selectCurrentUser } from "../../redux/user/user.selectors";
+import { useDispatch, useSelector } from "react-redux";
+import { clearCart, selectCartTotal } from "../../features/cart-slice";
+import { selectCurrentUser } from "../../features/user-reducer";
 
 export default function PaymentForm(): ReactElement {
+  const dispatch = useDispatch();
   const stripe = useStripe();
   const elements = useElements();
   const [isProcessingPayment, setIsProcessingPayment] = useState(false);
@@ -58,6 +59,7 @@ export default function PaymentForm(): ReactElement {
     } else {
       if (paymentResult.paymentIntent.status === "succeeded") {
         toast("Payment Successful.", { type: "success" });
+        dispatch(clearCart());
       }
     }
   };
