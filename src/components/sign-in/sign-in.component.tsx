@@ -11,7 +11,7 @@ import {
 import {
   googleSignInStart,
   emailSignInStart,
-} from "../../redux/user/user.actions";
+} from "../../features/user-reducer";
 
 export default function SignIn(): ReactElement {
   const dispatch = useDispatch();
