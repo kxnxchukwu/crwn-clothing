@@ -1,11 +1,11 @@
 import { ReactElement } from "react";
 import { useDispatch } from "react-redux";
 import {
-  clearItemFromCart,
   addItem,
-  removeItem,
+  clearItemFromCart,
+  removeCartItem as removeItem,
   Item,
-} from "../../redux/cart/cart.actions";
+} from "../../features/cart-slice";
 import {
   CheckoutItemContainer,
   ImageContainer,
@@ -30,17 +30,23 @@ export default function CheckoutItem({
       </ImageContainer>
       <TextContainer>{name}</TextContainer>
       <QuantityContainer>
-        <div className="arrow" onClick={() => dispatch(removeItem(cartItem))}>
+        <div
+          className="arrow"
+          onClick={() => dispatch(removeItem({ item: cartItem }))}
+        >
           &#10094;
         </div>
         <span className="value">{quantity}</span>
-        <div className="arrow" onClick={() => dispatch(addItem(cartItem))}>
+        <div
+          className="arrow"
+          onClick={() => dispatch(addItem({ item: cartItem }))}
+        >
           &#10095;
         </div>
       </QuantityContainer>
       <TextContainer className="price">€{price}</TextContainer>
       <RemoveButtonContainer
-        onClick={() => dispatch(clearItemFromCart(cartItem))}
+        onClick={() => dispatch(clearItemFromCart({ item: cartItem }))}
       >
         &#10006;
       </RemoveButtonContainer>
