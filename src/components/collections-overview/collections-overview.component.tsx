@@ -1,7 +1,7 @@
 import { ReactElement } from "react";
 import { useSelector } from "react-redux";
 import CollectionPreview from "../collection-preview/collection-preview.component";
-import { selectCollectionsForPreview } from "../../redux/shop/shop.selectors";
+import { selectCollectionsForPreview } from "../../features/shop-slice";
 import { CollectionsOverviewContainer } from "./collections-overview.styles";
 
 export default function CollectionsOverview(): ReactElement {

@@ -8,7 +8,7 @@ import {
   TitleContainer,
   PreviewContainer,
 } from "./collection-preview.styles";
-import { Item } from "../../redux/cart/cart.actions";
+import { Item } from "../../features/cart-slice";
 
 export interface CollectionPreviewProps {
   title: string;
@@ -30,7 +30,7 @@ export default function CollectionPreview({
         {items
           .filter((item, idx) => idx < 4)
           .map((item) => (
-            <CollectionItem key={item.id} item={item} />
+            <CollectionItem key={item.id} item={item} title={title} />
           ))}
       </PreviewContainer>
     </CollectionPreviewContainer>

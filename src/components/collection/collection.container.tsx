@@ -5,9 +5,9 @@ import { useSelector } from "react-redux";
 import {
   selectCollection,
   selectIsCollectionFetching,
-} from "../../redux/shop/shop.selectors";
+} from "../../features/shop-slice";
 import { useParams } from "react-router-dom";
-import { Item } from "../../redux/cart/cart.actions";
+import { Item } from "../../features/cart-slice";
 import Spinner from "../spinner/spinner.component";
 
 export default function CollectionPageContainer(): ReactElement {
@@ -27,7 +27,7 @@ export default function CollectionPageContainer(): ReactElement {
       <h2 className="title">{title.toUpperCase()}</h2>
       <div className="items">
         {items.map((item: Item) => (
-          <CollectionItem key={item.id} item={item} />
+          <CollectionItem key={item.id} item={item} title={title} />
         ))}
       </div>
     </div>
