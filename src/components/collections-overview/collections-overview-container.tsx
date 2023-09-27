@@ -1,6 +1,6 @@
 import { ReactElement } from "react";
 import { useSelector } from "react-redux";
-import { selectIsCollectionFetching } from "../../redux/shop/shop.selectors";
+import { selectIsCollectionFetching } from "../../features/shop-slice";
 import CollectionsOverview from "./collections-overview.component";
 
 import Spinner from "../spinner/spinner.component";
