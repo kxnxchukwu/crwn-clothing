@@ -1,6 +1,6 @@
 import React from "react";
 import "./cart-item.styles.scss";
-import { Item } from "../../redux/cart/cart.actions";
+import { Item } from "../../features/cart-slice";
 
 export interface CartItemProps {
   item: Item;
