@@ -5,14 +5,14 @@ import { useDispatch, useSelector } from "react-redux";
 import CartIcon from "../cart-icon/cart-icon.component";
 import CartDropdown from "../cart-dropdown/cart-dropdown.component";
 import { selectCardHidden } from "../../features/cart-slice";
-import { selectCurrentUser } from "../../redux/user/user.selectors";
+import { selectCurrentUser } from "../../features/user-reducer";
 import {
   HeaderContainer,
   LogoContainer,
   OptionsContainer,
   OptionLink,
 } from "./header.styles";
-import { signOutStart } from "../../redux/user/user.actions";
+import { signOutStart } from "../../features/user-reducer";
 import { useLocation } from "react-router-dom";
 
 export default function Header(): ReactElement {
